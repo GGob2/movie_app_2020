@@ -1,7 +1,13 @@
 import React from "react";
 // import PropTypes from "prop-types";
 
+
 class App extends React.Component {
+// react 앱의 생명주기 : Constructor --> render --> ComponentDidMount
+  constructor(props) {
+    super(props);
+    console.log('hello')
+  }
   // state는 반드시 클래스형 컴포넌트 안에서 소문자를 이용해서 사용해야한다.
   // state는 객체형태의 데이터다.
   state = {
@@ -22,9 +28,25 @@ class App extends React.Component {
     }));
   };
   
+  componentDidMount() {
+    console.log('렌더링 됨');
+  }
+
+  // 화면이 어떤 이벤트로 인해 Update 될때 실행
+  // setState --> render --> componentDidUpdate
+  componentDidUpdate() {
+    console.log('화면 업데이트됨!')
+  }
+
+  // 컴포넌트가 화면을 떠날 때 실행됨
+  componentWillUnmount() {
+    console.log('Goodbye')
+  }
+
 
   // class는 함수가 아니기 때문에, return문을 사용하려면 render() 함수를 사용해야 한다.
   render() {
+    console.log('렌더링중')
     // class를 this로 받음 . <-- 연산자를 사용해서 객체 활용가능
     return (
       <div>
