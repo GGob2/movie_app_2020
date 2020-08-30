@@ -1,5 +1,8 @@
 import React from "react";
 // import PropTypes from "prop-types";
+import axios from "axios";
+import Movie from "./Movie";
+import "./App.css";
 
 class App extends React.Component {
   state = {
@@ -7,18 +10,49 @@ class App extends React.Component {
     movies: [],
   };
 
+  // 데이터 로드 시간을 기다리기 위해 async - await 사용
+  getMovies = async () => {
+    const {
+      data: {
+        data: { movies },
+      },
+    } = await axios.get(
+      "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
+    );
+    this.setState({ movies, isLoding: false });
+  };
+
   // 6초 후에 isLoading 값을 false로 바꿈
   componentDidMount() {
     // 영화 데이터 로딩!
-    setTimeout(() => {
-      this.setState({ isLoding: false });
-    }, 6000);
+    this.getMovies();
   }
 
   render() {
-    const { isLoding } = this.state;
+    const { isLoding, movies } = this.state;
     // 3항 연산자 { 값? True : False }
-    return <div>{isLoding ? "Loading..." : "we are ready"} </div>;
+    return (
+      <section class="container">
+        {isLoding ? (
+          <div class="loader">
+            <span class="loader__text">Loading...</span>
+          </div>
+        ) : (
+          <div class="movies">
+            {movies.map((movie) => (
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                year={movie.year}
+                title={movie.title}
+                summary={movie.summary}
+                poster={movie.medium_cover_image}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    );
   }
 }
 
