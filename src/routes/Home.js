@@ -1,10 +1,10 @@
 import React from "react";
 // import PropTypes from "prop-types";
 import axios from "axios";
-import Movie from "components/Movie";
-import "./App.css";
+import Movie from "../components/Movie";
+import "./Home.css";
 
-class App extends React.Component {
+class Home extends React.Component {
   state = {
     isLoding: true,
     movies: [],
@@ -57,7 +57,7 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Home;
 
 /* 
   영화 앱을 만들기 위한 주석 
