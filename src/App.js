@@ -8,8 +8,10 @@ import About from "./routes/About";
 function App() {
   return (
     // HashRouter 때문에 주소창에 #이 붙음
+    // exact = 정확히 url api가 path 일때만 실행되게끔 함. 
     <HashRouter>
-      <Route path="/" component={Home} />
+      
+      <Route path="/" exact={true} component={Home} />
       <Route path="/about" component={About} />
     </HashRouter>
   );
