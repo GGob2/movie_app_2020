@@ -1,60 +1,11 @@
 import React from "react";
 // import PropTypes from "prop-types";
-import axios from "axios";
-import Movie from "components/Movie";
+import Home from "./routes/Home";
 import "./App.css";
+import { HashRouter, Route } from "react-router-dom";
 
-class App extends React.Component {
-  state = {
-    isLoding: true,
-    movies: [],
-  };
-
-  // 데이터 로드 시간을 기다리기 위해 async - await 사용
-  getMovies = async () => {
-    const {
-      data: {
-        data: { movies },
-      },
-    } = await axios.get(
-      "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
-    );
-    this.setState({ movies, isLoding: false });
-  };
-
-  // 6초 후에 isLoading 값을 false로 바꿈
-  componentDidMount() {
-    // 영화 데이터 로딩!
-    this.getMovies();
-  }
-
-  render() {
-    const { isLoding, movies } = this.state;
-    // 3항 연산자 { 값? True : False }
-    return (
-      <section className="container">
-        {isLoding ? (
-          <div className="loader">
-            <span className="loader__text">Loading...</span>
-          </div>
-        ) : (
-          <div className="movies">
-            {movies.map((movie) => (
-              <Movie
-                key={movie.id}
-                id={movie.id}
-                year={movie.year}
-                title={movie.title}
-                summary={movie.summary}
-                poster={movie.medium_cover_image}
-                genres={movie.genres}
-              />
-            ))}
-          </div>
-        )}
-      </section>
-    );
-  }
+function App() {
+  return <Home />;
 }
 
 export default App;
