@@ -5,14 +5,17 @@ import "./App.css";
 import { HashRouter, Route } from "react-router-dom";
 import About from "./routes/About";
 import Navigation from "./components/Navigation";
+import Detail from "./routes/Detail";
+
 function App() {
   return (
     // HashRouter 때문에 주소창에 #이 붙음
-    // exact = 정확히 url api가 path 일때만 실행되게끔 함. 
+    // exact = 정확히 url api가 path 일때만 실행되게끔 함.
     <HashRouter>
       <Navigation />
       <Route path="/" exact={true} component={Home} />
       <Route path="/about" component={About} />
+      <Route path="/movie-detail" component={Detail} />
     </HashRouter>
   );
 }
